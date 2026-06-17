@@ -32,7 +32,17 @@ jobs:
           key: ${{ secrets.SECRETDHA }}
           port: 22
           source: "."
-          target: "/var/www/html"
+          target: "/www/wwwroot/dhammika.run.place"
+
+      - name: Verify Files
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 54.169.242.62
+          username: root
+          key: ${{ secrets.SECRETDHA }}
+          port: 22
+          script: |
+            ls -la /www/wwwroot/dhammika.run.place
 
       - name: Set Permissions
         uses: appleboy/ssh-action@v1.0.3
@@ -42,5 +52,4 @@ jobs:
           key: ${{ secrets.SECRETDHA }}
           port: 22
           script: |
-            chown -R www-data:www-data /var/www/html
-            chmod -R 755 /var/www/html
+            chmod -R 755 /www/wwwroot/dhammika.run.place
