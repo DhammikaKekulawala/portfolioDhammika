@@ -1,48 +1,46 @@
 name: Deploy Website via SSH
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-  - name: Test SSH Connection
-    uses: appleboy/ssh-action@v1.0.3
-    with:
-      host: 54.169.242.62
-      username: root
-      key: ${{ secrets.SECRETDHA }}
-      port: 22
-      script: |
-        whoami
-        pwd
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 54.169.242.62
+          username: root
+          key: ${{ secrets.SECRETDHA }}
+          port: 22
+          script: |
+            whoami
+            pwd
 
-  - name: Deploy Website
-    uses: appleboy/scp-action@v0.1.7
-    with:
-      host: 54.169.242.62
-      username: root
-      key: ${{ secrets.SECRETDHA }}
-      port: 22
-      source: "./*"
-      target: "/var/www/html"
+      - name: Deploy Website
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 54.169.242.62
+          username: root
+          key: ${{ secrets.SECRETDHA }}
+          port: 22
+          source: "."
+          target: "/var/www/html"
 
-  - name: Set Permissions
-    uses: appleboy/ssh-action@v1.0.3
-    with:
-      host: 54.169.242.62
-      username: root
-      key: ${{ secrets.SECRETDHA }}
-      port: 22
-      script: |
-        chown -R www-data:www-data /var/www/html
-        chmod -R 755 /var/www/html
-```
+      - name: Set Permissions
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 54.169.242.62
+          username: root
+          key: ${{ secrets.SECRETDHA }}
+          port: 22
+          script: |
+            chown -R www-data:www-data /var/www/html
+            chmod -R 755 /var/www/html
