@@ -16,7 +16,7 @@ jobs:
       - name: Test SSH Connection
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 54.169.242.62
+          host: 13.212.215.85
           username: root
           key: ${{ secrets.SECRETDHA }}
           port: 22
@@ -27,7 +27,7 @@ jobs:
       - name: Deploy Website
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: 54.169.242.62
+          host: 13.212.215.85
           username: root
           key: ${{ secrets.SECRETDHA }}
           port: 22
@@ -37,7 +37,7 @@ jobs:
       - name: Verify Files
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 54.169.242.62
+          host: 13.212.215.85
           username: root
           key: ${{ secrets.SECRETDHA }}
           port: 22
@@ -47,7 +47,7 @@ jobs:
       - name: Set Permissions
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 54.169.242.62
+          host: 13.212.215.85
           username: root
           key: ${{ secrets.SECRETDHA }}
           port: 22
